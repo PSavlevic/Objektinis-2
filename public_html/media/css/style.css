@@ -1,0 +1,181 @@
+@font-face {
+    font-family: 'manrope';
+    src: url('/media/css/fonts/manrope-light.woff2') format('woff2'), /* Super Modern Browsers */
+        url('/media/css/fonts/manrope-light.woff') format('woff') /* Pretty Modern Browsers */
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'manrope';
+    color: #333333;
+}
+
+/* ### Form Styles ### */
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+
+.form-wrapper form {
+    width: 300px;
+    border: 1px solid #bfbfbf;
+    background: white;
+    padding: 20px;
+}
+.form-wrapper label span {
+    margin: 5px 0;
+    display: block;
+}
+
+.form-wrapper .field-wrapper {
+    margin: 14px 0;
+}
+
+.form-wrapper .field-wrapper input {
+    width: 100%;
+    color: #333333;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.form-wrapper .field-wrapper select {
+    color: #333333;
+    padding: 5px;
+    box-sizing: border-box;  
+    font-weight: bold;
+	background: white;
+    width: 50%;
+}
+
+.form-wrapper .field-error {
+    margin: 4px 0;
+    font-size: small;
+    color: red;    
+}
+
+.form-wrapper .button-wrapper {
+    border-top: 1px solid #bfbfbf;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.form-wrapper .button-wrapper button {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    min-width: 30%;
+    background: white;
+    color: black;
+    font-weight: bold;
+    border: 1px solid grey;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.form-wrapper .button-wrapper button:hover {
+    border: 1px solid white;
+	background: rgb(180, 20, 70);
+	color: white;
+}
+
+/* ### Other Styles ### */
+.message {
+    position: absolute;
+    top: calc(50vh - 150px);
+    left: 10%;
+    padding: 60px;
+	border-radius: 50%;
+    background: rgb(255, 220, 220);
+	width: 100px;
+	height: 100px;
+	text-align: center;
+}
+
+.message span.text {
+    background: rgb(210, 240, 245);
+    font-weight: bold;
+    padding: 20px;
+	display: block;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+
+.nav-wrapper {
+    background: white;
+    display: flex;
+    justify-content: flex-start;
+	box-sizing: border-box;
+}
+
+.nav-wrapper a {
+    display: block;
+    padding: 10px;
+	text-decoration: none;
+	color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+.table-wrapper {
+	padding: 20px 0;
+}
+
+.table-wrapper table {
+	width: 600px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.table-wrapper table tr:hover td {
+	background: rgb(180, 20, 70);
+	color: white;
+}
+
+.table-wrapper table,
+.table-wrapper td,
+.table-wrapper th {
+	box-sizing: border-box;
+	border: 1px solid black;
+	border-collapse: collapse;
+	background: white;
+}
+
+.table-wrapper th {
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+
+.table-wrapper tbody td span:not(:last-child):after {
+	content: ', ';
+}
+
+.nav-wrapper .void {
+	width: 100%;
+	border-bottom: 1px solid #333;
+}
+
+.nav-wrapper .field-wrapper {
+	border-bottom: 1px solid #333;
+	border-right: 1px solid white;
+	border-left: 1px soldi white;
+	min-width: 120px;
+}
+
+.nav-wrapper div.active {
+	border-left: 1px solid #333;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid white;
+}
+
+div.active a {
+	/*color: black;*/
+}
