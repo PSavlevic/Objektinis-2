@@ -48,7 +48,7 @@ class Drink
     /**
      * @param int $id
      */
-    public function setId(integer $id)
+    public function setId(int $id)
     {
         $this->data['id'] = $id;
     }
