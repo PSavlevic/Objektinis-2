@@ -11,6 +11,7 @@ class Drink
             $this->setData($data);
         } else {
             $this->data = [
+                'id' => null,
                 'name' => null,
                 'amount_ml' => null,
                 'abarot' => null,
@@ -25,6 +26,9 @@ class Drink
      */
     public function setData($array)
     {
+        if(isset($this->data['id'])){
+            $this->setImage($array['id']) ?? null;
+        }
         $this->setName($array['name']) ?? null;
         $this->setAmount($array['amount_ml']) ?? null;
         $this->setAbarot($array['abarot']) ?? null;
@@ -55,7 +59,7 @@ class Drink
 
 
     /**
-     * @return mixed
+     * @return int|null
      */
     public function getId()
     {
