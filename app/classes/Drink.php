@@ -26,13 +26,13 @@ class Drink
      */
     public function setData($array)
     {
-        if(isset($this->data['id'])){
-            $this->setImage($array['id']) ?? null;
+        if(isset($array['id'])){
+            $this->setId($array['id']);
         }
-        $this->setName($array['name']) ?? null;
-        $this->setAmount($array['amount_ml']) ?? null;
-        $this->setAbarot($array['abarot']) ?? null;
-        $this->setImage($array['image']) ?? null;
+        $this->setName($array['name'] ?? null) ;
+        $this->setAmount($array['amount_ml']  ?? null);
+        $this->setAbarot($array['abarot'] ?? null);
+        $this->setImage($array['image'] ?? null);
     }
 
     /**
