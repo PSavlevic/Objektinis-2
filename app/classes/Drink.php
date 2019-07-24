@@ -1,10 +1,12 @@
 <?php
 
-class Drink {
+class Drink
+{
 
     private $data = [];
 
-    public function __construct($data = null) {
+    public function __construct($data = null)
+    {
         if ($data) {
             $this->setData($data);
         } else {
@@ -21,7 +23,8 @@ class Drink {
      * Sets all data from array
      * @param array $array
      */
-    public function setData($array) {
+    public function setData($array)
+    {
         $this->setName($array['name']) ?? null;
         $this->setAmount($array['amount_ml']) ?? null;
         $this->setAbarot($array['abarot']) ?? null;
@@ -32,7 +35,8 @@ class Drink {
      * Gets all data as array
      * @return array
      */
-    public function getData() {
+    public function getData()
+    {
         return [
             'name' => $this->getName(),
             'amount_ml' => $this->getAmount(),
@@ -42,10 +46,29 @@ class Drink {
     }
 
     /**
+     * @param int $id
+     */
+    public function setId(integer $id)
+    {
+        $this->data['id'] = $id;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->data['id'];
+    }
+
+
+    /**
      * Sets name
      * @param string $name
      */
-    public function setName(string $name) {
+    public function setName(string $name)
+    {
         $this->data['name'] = $name;
     }
 
@@ -53,7 +76,8 @@ class Drink {
      * Returns name
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->data['name'];
     }
 
@@ -61,7 +85,8 @@ class Drink {
      * Sets data amount
      * @param int $amount
      */
-    public function setAmount(int $amount) {
+    public function setAmount(int $amount)
+    {
         $this->data['amount_ml'] = $amount;
     }
 
@@ -69,7 +94,8 @@ class Drink {
      * Returns amount in mililiters
      * @return int
      */
-    public function getAmount() {
+    public function getAmount()
+    {
         return $this->data['amount_ml'];
     }
 
@@ -77,7 +103,8 @@ class Drink {
      * Sets data abarot
      * @param float $abarot
      */
-    public function setAbarot(float $abarot) {
+    public function setAbarot(float $abarot)
+    {
         if ($abarot >= 0 && $abarot < 100) {
             $this->data['abarot'] = $abarot;
         } else {
@@ -89,7 +116,8 @@ class Drink {
      * Returns alchohol percentage
      * @return float
      */
-    public function getAbarot() {
+    public function getAbarot()
+    {
         return $this->data['abarot'];
     }
 
@@ -97,7 +125,8 @@ class Drink {
      * Sets data image
      * @param string $image
      */
-    public function setImage(string $image) {
+    public function setImage(string $image)
+    {
         $this->data['image'] = $image;
     }
 
@@ -105,7 +134,8 @@ class Drink {
      * Returns image url
      * @return string
      */
-    public function getImage() {
+    public function getImage()
+    {
         return $this->data['image'];
     }
 

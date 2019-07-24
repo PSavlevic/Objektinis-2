@@ -16,10 +16,10 @@ $db->updateRow('test_table', 1, ['name' => 'Rytis Citins', 'balls' => false]);
 
 $db->rowInsertIfNotExists('test_table', 4, ['name' => 'Bubilius Kybys', 'balls' => true]);
 
-var_dump('All database data:', $db->getData());
+//var_dump('All database data:', $db->getData());
 
 $rows_with_balls = $db->getRowsWhere('test_table', ['balls' => true]);
-var_dump('Rows with balls:', $rows_with_balls);
+//var_dump('Rows with balls:', $rows_with_balls);
 
 $drink = new Drink;
 $drink->setName('mano neimas');
@@ -34,7 +34,7 @@ $drink->setData([
     'image' => 'IMGLINK'
 ]);
 
-var_dump('Drink:', $drink);
+//var_dump('Drink:', $drink);
 
 ?>
 <html>
