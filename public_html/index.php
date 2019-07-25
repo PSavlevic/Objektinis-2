@@ -1,5 +1,7 @@
 <?php
 
+use App\Drinks\Drink;
+
 require '../bootloader.php';
 //
 $nav = [
@@ -37,36 +39,41 @@ $nav = [
 //var_dump('Drink:', $drink);
 
 
-////4uzd testavimas:
-//$modelDrinks = new App\Drinks\Model();
-//
-//$drink = new App\Drinks\Drink([
-//    'id' => 1,
-//    'name' => 'Svoboda XXX',
-//    'amount_ml' => 60,
-//    'abarot' => 700,
-//    'image' => '/media/images/svoboda2.png'
-//]);
-//
-//$modelDrinks -> update($drink);
-//
-////5uzd testavimas:
-//$drinks = $modelDrinks->get();
-//
-//foreach ($drinks as $drink) {
-//    $modelDrinks->delete($drink);
 
-//$drink = new App\Drinks\Drink([
-//    //'id' => 0,
-//    'name' => 'Absent',
-//    'amount_ml' => 500,
-//    'abarot' => 70,
-//    'image' => 'https://cdn1.wine-searcher.net/images/labels/47/12/10924712.jpg'
-//]);
+$drink_finland = new App\Drinks\Drink([
+    //'id' => 0,
+    'name' => 'Finlandia Vodke',
+    'amount_ml' => 750,
+    'abarot' => 40,
+    'image' => 'https://cdn.diffords.com/contrib/bws/2017/10/59db863511455.jpg'
+]);
+$drink_absent = new App\Drinks\Drink([
+    //'id' => 0,
+    'name' => 'Absent',
+    'amount_ml' => 500,
+    'abarot' => 70,
+    'image' => 'https://cdn1.wine-searcher.net/images/labels/47/12/10924712.jpg'
+]);
+$drink_corona = new App\Drinks\Drink([
+    //'id' => 0,
+    'name' => 'Corona',
+    'amount_ml' => 350,
+    'abarot' => 4.5,
+    'image' => 'https://products2.imgix.drizly.com/ci-corona-extra-2b48031ca2c738b1.jpeg?auto=format%2Ccompress&fm=jpeg&q=20'
+]);
+$drink_heineken = new App\Drinks\Drink([
+    //'id' => 0,
+    'name' => 'Heineken',
+    'amount_ml' => 350,
+    'abarot' => 4.5,
+    'image' => 'https://products1.imgix.drizly.com/ci-heineken-lager-6ea7dedfaaced647.jpeg?auto=format%2Ccompress&fm=jpeg&q=20'
+]);
+
+
 //////
-$fileDB = new Core\FileDB(DB_FILE);
-$fileDB->load();
-$fileDB->createTable('drinks');
+//$fileDB = new Core\FileDB(DB_FILE);
+//$fileDB->load();
+//$fileDB->createTable('drinks');
 ////
 //$fileDB->insertRow('drinks', $drink->getData());
 //$var  = $fileDB->getRowsWhere('drinks', ['abarot' => 4.7]);
@@ -74,17 +81,13 @@ $fileDB->createTable('drinks');
 
 $modelDrinks = new App\Drinks\Model();
 
-var_dump($modelDrinks->get());
+$modelDrinks->insert($drink_absent);
+$modelDrinks->insert($drink_corona);
+$modelDrinks->insert($drink_heineken);
+$modelDrinks->insert($drink_finland);
 
-$drinks = $modelDrinks->get(['abarot' => 4.7]);
-
-foreach ($drinks as $drink) {
-    $modelDrinks->update($drink);
-    var_dump($modelDrinks);
-}
-
-$gerimuArrajus = $fileDB->getData();
-
+$drinks = $modelDrinks->get();
+var_dump($drinks);
 ?>
 <html>
 <head>
@@ -104,14 +107,13 @@ $gerimuArrajus = $fileDB->getData();
     <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
 </div>
 
-<div class="gerimas">
-    <?php foreach ($gerimuArrajus as $key => $value): ?>
-        <?php foreach ($value as $v_key => $v_value): ?>
-            <h1><?php print $v_value['name']; ?></h1>
-            <h2><?php print $v_value['amount_ml'] . 'ml' ?></h2>
-            <h2><?php print $v_value['abarot'] . '%' ?></h2>
-            <img src="<?php print $v_value['image']; ?>" alt="foto">
-        <?php endforeach; ?>
+<div>
+    <?php foreach ($drinks as $key => $drink): ?>
+    <h1><?php print $drink->getName(); ?></h1>
+    <h2><?php print $drink->getAmount(); ?></h2>
+    <h3><?php print $drink->getAbarot(); ?></h3>
+        <img src="<?php print $drink->getImage(); ?>" alt="foto">
+
     <?php endforeach; ?>
 </div>
 </body>
