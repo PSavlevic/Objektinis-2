@@ -6,7 +6,7 @@ class App
 {
 
     /** @var \Core\FileDB **/
-    public $db;
+    public static $db;
 
     public function __construct()
     {

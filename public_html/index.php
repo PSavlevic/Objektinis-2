@@ -10,6 +10,9 @@ require '../bootloader.php';
 $db = new Core\FileDB(DB_FILE);
 $modelDrinks = new App\Drinks\Model($db);
 
+$testasApp = \App\App::$db->getData();
+var_dump($testasApp);
+
 $form = [
     'attr' => [
         //'action' => '', Nebūtina, jeigu action yra ''
