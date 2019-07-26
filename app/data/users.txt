@@ -1,1 +1,1 @@
-null
+{"drinks":[{"id":null,"name":"Kisielius","amount_ml":23,"abarot":43,"image":"kazkoks"}]}
