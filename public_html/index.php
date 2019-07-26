@@ -5,9 +5,10 @@
 
 require '../bootloader.php';
 
-$modelDrinks = new App\Drinks\Model();
 
 
+$db = new Core\FileDB(DB_FILE);
+$modelDrinks = new App\Drinks\Model($db);
 
 $form = [
     'attr' => [
@@ -30,6 +31,7 @@ $form = [
             'extra' => [
                 'validators' => [
                     'validate_not_empty',
+                    //validate float
                 ]
             ],
         ],
@@ -38,7 +40,7 @@ $form = [
             'type' => 'text',
             'extra' => [
                 'validators' => [
-                    'validate_not_empty',
+                    'validate_not_empty'
                 ]
             ],
         ],
@@ -191,6 +193,8 @@ var_dump($modelDrinks->get());
 //$drink = new App\Drinks\Drink([
 //$filtered_input;
 //]);
+
+
 
 ?>
 <html>
