@@ -1,14 +1,107 @@
 <?php
 
-use App\Drinks\Drink;
+//use App\Drinks\Drink;
+//use App\Drinks\Model;
 
 require '../bootloader.php';
-//
-$nav = [
-    'left' => [
-        ['url' => '/', 'title' => 'Home']
+
+$modelDrinks = new App\Drinks\Model();
+
+
+
+$form = [
+    'attr' => [
+        //'action' => '', Nebūtina, jeigu action yra ''
+        'method' => 'POST',
+    ],
+    'fields' => [
+        'name' => [
+            'label' => 'Gerimo pavadinimas',
+            'type' => 'text',
+            'extra' => [
+                'validators' => [
+                    'validate_not_empty',
+                ]
+            ],
+        ],
+        'amount_ml' => [
+            'label' => 'Amount(ml)',
+            'type' => 'text',
+            'extra' => [
+                'validators' => [
+                    'validate_not_empty',
+                ]
+            ],
+        ],
+        'abarot' => [
+            'label' => 'Abarotai(%)',
+            'type' => 'text',
+            'extra' => [
+                'validators' => [
+                    'validate_not_empty',
+                ]
+            ],
+        ],
+        'image' => [
+            'label' => 'Image link',
+            'type' => 'text',
+            'extra' => [
+                'validators' => [
+                    'validate_not_empty',
+                ]
+            ],
+        ],
+    ],
+    'buttons' => [
+        'submit' => [
+            'title' => 'Prideti gerima',
+            'extra' => [
+                'attr' => [
+                    'class' => 'red-btn'
+                ]
+            ]
+        ],
+        'delete' => [
+            'title' => 'Isgerti viska',
+            'extra' => [
+                'attr' => [
+                    'class' => 'blue-btn'
+                ]
+            ]
+        ],
+    ],
+
+    'callbacks' => [
+        'success' => 'form_success',
+        'fail' => 'form_fail'
+    ],
+    'validators' => [
+        'validate_login'
     ]
 ];
+
+
+$filtered_input = get_form_input($form);
+//if (!empty($filtered_input)) {
+//    validate_form($filtered_input, $form, $modelDrinks);
+//}
+function form_success($filtered_input, &$form, $modelDrinks) {
+    $modelDrinks->insert(new App\Drinks\Drink($filtered_input));
+}
+function form_fail() {
+    print 'fail';
+}
+switch (get_form_action()) {
+    case 'submit':
+        validate_form($filtered_input, $form, $modelDrinks);
+        break;
+    case 'delete':
+        foreach ($modelDrinks->get() as $drink) {
+            $modelDrinks->delete($drink);
+        }
+}
+var_dump($modelDrinks->get());
+
 //
 //$db = new Core\FileDB(DB_FILE);
 //$db->createTable('test_table');
@@ -39,35 +132,37 @@ $nav = [
 //var_dump('Drink:', $drink);
 
 
+//$drink_finland = new App\Drinks\Drink([
+//    //'id' => 0,
+//    'name' => 'Finlandia Vodke',
+//    'amount_ml' => 750,
+//    'abarot' => 40,
+//    'image' => 'https://cdn.diffords.com/contrib/bws/2017/10/59db863511455.jpg'
+//]);
+//$drink_absent = new App\Drinks\Drink([
+//    //'id' => 0,
+//    'name' => 'Absent',
+//    'amount_ml' => 500,
+//    'abarot' => 70,
+//    'image' => 'https://cdn1.wine-searcher.net/images/labels/47/12/10924712.jpg'
+//]);
+//$drink_corona = new App\Drinks\Drink([
+//    //'id' => 0,
+//    'name' => 'Corona',
+//    'amount_ml' => 350,
+//    'abarot' => 4.5,
+//    'image' => 'https://products2.imgix.drizly.com/ci-corona-extra-2b48031ca2c738b1.jpeg?auto=format%2Ccompress&fm=jpeg&q=20'
+//]);
+//$drink_heineken = new App\Drinks\Drink([
+//    //'id' => 0,
+//    'name' => 'Heineken',
+//    'amount_ml' => 350,
+//    'abarot' => 4.5,
+//    'image' => 'https://products1.imgix.drizly.com/ci-heineken-lager-6ea7dedfaaced647.jpeg?auto=format%2Ccompress&fm=jpeg&q=20'
+//]);
 
-$drink_finland = new App\Drinks\Drink([
-    //'id' => 0,
-    'name' => 'Finlandia Vodke',
-    'amount_ml' => 750,
-    'abarot' => 40,
-    'image' => 'https://cdn.diffords.com/contrib/bws/2017/10/59db863511455.jpg'
-]);
-$drink_absent = new App\Drinks\Drink([
-    //'id' => 0,
-    'name' => 'Absent',
-    'amount_ml' => 500,
-    'abarot' => 70,
-    'image' => 'https://cdn1.wine-searcher.net/images/labels/47/12/10924712.jpg'
-]);
-$drink_corona = new App\Drinks\Drink([
-    //'id' => 0,
-    'name' => 'Corona',
-    'amount_ml' => 350,
-    'abarot' => 4.5,
-    'image' => 'https://products2.imgix.drizly.com/ci-corona-extra-2b48031ca2c738b1.jpeg?auto=format%2Ccompress&fm=jpeg&q=20'
-]);
-$drink_heineken = new App\Drinks\Drink([
-    //'id' => 0,
-    'name' => 'Heineken',
-    'amount_ml' => 350,
-    'abarot' => 4.5,
-    'image' => 'https://products1.imgix.drizly.com/ci-heineken-lager-6ea7dedfaaced647.jpeg?auto=format%2Ccompress&fm=jpeg&q=20'
-]);
+
+
 
 
 //////
@@ -79,15 +174,24 @@ $drink_heineken = new App\Drinks\Drink([
 //$var  = $fileDB->getRowsWhere('drinks', ['abarot' => 4.7]);
 
 
-$modelDrinks = new App\Drinks\Model();
 
-$modelDrinks->insert($drink_absent);
-$modelDrinks->insert($drink_corona);
-$modelDrinks->insert($drink_heineken);
-$modelDrinks->insert($drink_finland);
 
-$drinks = $modelDrinks->get();
-var_dump($drinks);
+//$modelDrinks->insert($drink_absent);
+//$modelDrinks->insert($drink_corona);
+//$modelDrinks->insert($drink_heineken);
+//$modelDrinks->insert($drink_finland);
+
+//$filtered_input = get_form_input($form);
+//validate_form($filtered_input, $form);
+//
+//$drinks = $modelDrinks->get();
+//var_dump($drinks);
+//
+//var_dump($filtered_input);
+//$drink = new App\Drinks\Drink([
+//$filtered_input;
+//]);
+
 ?>
 <html>
 <head>
@@ -107,14 +211,13 @@ var_dump($drinks);
     <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
 </div>
 
-<div>
-    <?php foreach ($drinks as $key => $drink): ?>
-    <h1><?php print $drink->getName(); ?></h1>
-    <h2><?php print $drink->getAmount(); ?></h2>
-    <h3><?php print $drink->getAbarot(); ?></h3>
-        <img src="<?php print $drink->getImage(); ?>" alt="foto">
-
-    <?php endforeach; ?>
-</div>
+<!--<div>-->
+<!--    --><?php //foreach ($drinks as $key => $drink): ?>
+<!--        <h1>--><?php //print $drink->getName(); ?><!--</h1>-->
+<!--        <h2>--><?php //print $drink->getAmount(); ?><!--</h2>-->
+<!--        <h3>--><?php //print $drink->getAbarot(); ?><!--</h3>-->
+<!--        <img src="--><?php //print $drink->getImage(); ?><!--" alt="foto">-->
+<!--    --><?php //endforeach; ?>
+<!--</div>-->
 </body>
 </html>
