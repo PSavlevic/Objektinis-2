@@ -2,6 +2,8 @@
 
 namespace App\Drinks;
 
+use \App\App;
+
 class Model
 {
 
@@ -9,7 +11,7 @@ class Model
 
     public function __construct()
     {
-        \App\App::$db->createTable($this->table_name);
+        App::$db->createTable($this->table_name);
     }
 
     /** 2uzd turi irasyti $drink i duombaze
@@ -17,7 +19,7 @@ class Model
      */
     public function insert(Drink $drink)
     {
-        return \App\App::$db->insertRow($this->table_name, $drink->getData());
+        return App::$db->insertRow($this->table_name, $drink->getData());
     }
 
     /**
@@ -28,7 +30,7 @@ class Model
     public function get($conditions = [])
     {
         $drinks = [];
-        $rows = \App\App::$db->getRowsWhere($this->table_name, $conditions);
+        $rows = App::$db->getRowsWhere($this->table_name, $conditions);
         foreach ($rows as $row_id => $row_data) {
             $row_data['id'] = $row_id;
             $drinks[] = new Drink($row_data);
@@ -43,7 +45,7 @@ class Model
      */
     public function update(Drink $drink)
     {
-        return \App\App::$db->updateRow($this->table_name, $drink->getId(), $drink->getData());
+        return App::$db->updateRow($this->table_name, $drink->getId(), $drink->getData());
     }
 
     /**
@@ -53,12 +55,12 @@ class Model
      */
     public function delete(Drink $drink)
     {
-        return \App\App::$db->deleteRow($this->table_name, $drink->getId());
+        return App::$db->deleteRow($this->table_name, $drink->getId());
     }
 
     public function __destruct()
     {
-        \App\App::$db->save();
+        App::$db->save();
     }
 }
 

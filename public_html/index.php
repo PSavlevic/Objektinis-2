@@ -105,6 +105,7 @@ switch (get_form_action()) {
             $modelDrinks->delete($drink);
         }
 }
+
 var_dump($modelDrinks->get());
 
 //
