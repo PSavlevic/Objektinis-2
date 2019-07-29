@@ -1,112 +1,136 @@
 <?php
 
-//use App\Drinks\Drink;
-//use App\Drinks\Model;
+use App\Drinks\Drink;
+use App\Drinks\Model;
+use App\Users\User;
+
 
 require '../bootloader.php';
 
-
-
-$db = new Core\FileDB(DB_FILE);
-$modelDrinks = new App\Drinks\Model($db);
-
-$testasApp = \App\App::$db->getData();
-var_dump($testasApp);
-
-$form = [
-    'attr' => [
-        //'action' => '', Nebūtina, jeigu action yra ''
-        'method' => 'POST',
-    ],
-    'fields' => [
-        'name' => [
-            'label' => 'Gerimo pavadinimas',
-            'type' => 'text',
-            'extra' => [
-                'validators' => [
-                    'validate_not_empty',
-                ]
-            ],
-        ],
-        'amount_ml' => [
-            'label' => 'Amount(ml)',
-            'type' => 'text',
-            'extra' => [
-                'validators' => [
-                    'validate_not_empty',
-                    //validate float
-                ]
-            ],
-        ],
-        'abarot' => [
-            'label' => 'Abarotai(%)',
-            'type' => 'text',
-            'extra' => [
-                'validators' => [
-                    'validate_not_empty'
-                ]
-            ],
-        ],
-        'image' => [
-            'label' => 'Image link',
-            'type' => 'text',
-            'extra' => [
-                'validators' => [
-                    'validate_not_empty',
-                ]
-            ],
-        ],
-    ],
-    'buttons' => [
-        'submit' => [
-            'title' => 'Prideti gerima',
-            'extra' => [
-                'attr' => [
-                    'class' => 'red-btn'
-                ]
-            ]
-        ],
-        'delete' => [
-            'title' => 'Isgerti viska',
-            'extra' => [
-                'attr' => [
-                    'class' => 'blue-btn'
-                ]
-            ]
-        ],
-    ],
-
-    'callbacks' => [
-        'success' => 'form_success',
-        'fail' => 'form_fail'
-    ],
-    'validators' => [
-        'validate_login'
+$nav = [
+    'left' => [
+        ['url' => '/index.php', 'title' => 'Home'],
+         ['url' => '/register.php', 'title' => 'Register']
     ]
 ];
 
+class Test
+{
+    public static $db = 0;
+    public $props;
 
-$filtered_input = get_form_input($form);
-//if (!empty($filtered_input)) {
-//    validate_form($filtered_input, $form, $modelDrinks);
+    public function  __construct()
+    {
+        self::$db++;
+        var_dump(self::$db);
+    }
+}
+
+$test = new Test();
+$test2 = new Test();
+
+
+//
+//$db = new Core\FileDB(DB_FILE);
+//$modelDrinks = new \App\Drinks\Model($db);
+//
+//$testasApp = \App\App::$db->getData();
+//var_dump($testasApp);
+//
+//$form = [
+//    'attr' => [
+//        //'action' => '', Nebūtina, jeigu action yra ''
+//        'method' => 'POST',
+//    ],
+//    'fields' => [
+//        'name' => [
+//            'label' => 'Gerimo pavadinimas',
+//            'type' => 'text',
+//            'extra' => [
+//                'validators' => [
+//                    'validate_not_empty',
+//                ]
+//            ],
+//        ],
+//        'amount_ml' => [
+//            'label' => 'Amount(ml)',
+//            'type' => 'text',
+//            'extra' => [
+//                'validators' => [
+//                    'validate_not_empty',
+//                    //validate float
+//                ]
+//            ],
+//        ],
+//        'abarot' => [
+//            'label' => 'Abarotai(%)',
+//            'type' => 'text',
+//            'extra' => [
+//                'validators' => [
+//                    'validate_not_empty'
+//                ]
+//            ],
+//        ],
+//        'image' => [
+//            'label' => 'Image link',
+//            'type' => 'text',
+//            'extra' => [
+//                'validators' => [
+//                    'validate_not_empty',
+//                ]
+//            ],
+//        ],
+//    ],
+//    'buttons' => [
+//        'submit' => [
+//            'title' => 'Prideti gerima',
+//            'extra' => [
+//                'attr' => [
+//                    'class' => 'red-btn'
+//                ]
+//            ]
+//        ],
+//        'delete' => [
+//            'title' => 'Isgerti viska',
+//            'extra' => [
+//                'attr' => [
+//                    'class' => 'blue-btn'
+//                ]
+//            ]
+//        ],
+//    ],
+//
+//    'callbacks' => [
+//        'success' => 'form_success',
+//        'fail' => 'form_fail'
+//    ],
+//    'validators' => [
+//        'validate_login'
+//    ]
+//];
+//
+//
+//$filtered_input = get_form_input($form);
+////if (!empty($filtered_input)) {
+////    validate_form($filtered_input, $form, $modelDrinks);
+////}
+//function form_success($filtered_input, &$form, $modelDrinks) {
+//    $modelDrinks->insert(new App\Drinks\Drink($filtered_input));
 //}
-function form_success($filtered_input, &$form, $modelDrinks) {
-    $modelDrinks->insert(new App\Drinks\Drink($filtered_input));
-}
-function form_fail() {
-    print 'fail';
-}
-switch (get_form_action()) {
-    case 'submit':
-        validate_form($filtered_input, $form, $modelDrinks);
-        break;
-    case 'delete':
-        foreach ($modelDrinks->get() as $drink) {
-            $modelDrinks->delete($drink);
-        }
-}
-
-var_dump($modelDrinks->get());
+//function form_fail() {
+//    print 'fail';
+//}
+//switch (get_form_action()) {
+//    case 'submit':
+//        validate_form($filtered_input, $form, $modelDrinks);
+//        break;
+//    case 'delete':
+//        foreach ($modelDrinks->get() as $drink) {
+//            $modelDrinks->delete($drink);
+//        }
+//}
+//
+//var_dump($modelDrinks->get());
 
 //
 //$db = new Core\FileDB(DB_FILE);

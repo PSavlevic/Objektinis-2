@@ -3,7 +3,7 @@
 namespace App\Users;
 
 use \App\App;
-use \App\Users\User;
+
 
 class Model
 {
@@ -19,11 +19,11 @@ class Model
      * @param Drink $drink
      */
     public function insert(User $user) {
-        return App::$db->insertRow($this->table_name, $user->getID(), $user->getData());
+        return App::$db->insertRow($this->table_name, $user->getData());
     }
 
     /**
-     * 3uzd  Get array from DB under given conditions
+     * 3uzd
      * @param array $conditions
      * @return User[]
      */
@@ -38,7 +38,7 @@ class Model
     }
 
     /**
-     * 4uzd Update selected row content
+     * 4uzd
      * @param Drink $drink
      * @return bool
      */

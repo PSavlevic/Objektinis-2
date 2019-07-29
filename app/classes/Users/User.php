@@ -22,8 +22,8 @@ class User
     public function setData($array)
     {
         $this->setName($array['name'] ?? null);
-        $this->setAmount($array['email'] ?? null);
-        $this->setAbarot($array['password'] ?? null);
+        $this->setEmail($array['email'] ?? null);
+        $this->setPassword($array['password'] ?? null);
     }
 
     public function getData()
@@ -64,5 +64,4 @@ class User
     {
         return $this->data['password'];
     }
-
 }

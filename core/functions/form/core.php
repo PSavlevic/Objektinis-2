@@ -26,7 +26,7 @@ function get_form_action() {
  * @param array $form
  * @return boolean
  */
-function validate_form($filtered_input, &$form, $modelDrinks) {
+function validate_form($filtered_input, &$form) {
     $success = true;
     foreach ($form['fields'] as $field_id => &$field) {
         $field_value = $filtered_input[$field_id];
@@ -50,7 +50,7 @@ function validate_form($filtered_input, &$form, $modelDrinks) {
     }
     if ($success) {
         if (isset($form['callbacks']['success'])) {
-            $form['callbacks']['success']($filtered_input, $form, $modelDrinks);
+            $form['callbacks']['success']($filtered_input, $form);
         }
     } else {
         if (isset($form['callbacks']['fail'])) {
