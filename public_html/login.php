@@ -17,34 +17,18 @@ $nav = [
 ];
 
 
-$modelUsers = new App\Users\Model();
-
-//$testasApp = \App\App::$db->getData();
-//var_dump($testasApp);
-
-
 $form = [
     'attr' => [
         //'action' => '', Nebūtina, jeigu action yra ''
         'method' => 'POST',
     ],
     'fields' => [
-        'name' => [
-            'label' => 'Username',
-            'type' => 'text',
-            'extra' => [
-                'validators' => [
-                    'validate_not_empty',
-                ]
-            ],
-        ],
         'email' => [
             'label' => 'Email',
             'type' => 'email',
             'extra' => [
                 'validators' => [
                     'validate_not_empty',
-                    'validate_mail'
                     //validate float
                 ]
             ],
@@ -58,33 +42,24 @@ $form = [
                 ]
             ],
         ],
-        'password2' => [
-            'label' => 'Password repeat',
-            'type' => 'password',
-            'extra' => [
-                'validators' => [
-                    'validate_not_empty'
-                ]
-            ],
-        ],
     ],
     'buttons' => [
         'submit' => [
-            'title' => 'Prideti useri',
+            'title' => 'Login',
             'extra' => [
                 'attr' => [
                     'class' => 'red-btn'
                 ]
             ]
         ],
-        'delete' => [
-            'title' => 'Istrinti visus',
-            'extra' => [
-                'attr' => [
-                    'class' => 'blue-btn'
-                ]
-            ]
-        ],
+//        'delete' => [
+//            'title' => 'LogOut',
+//            'extra' => [
+//                'attr' => [
+//                    'class' => 'blue-btn'
+//                ]
+//            ]
+//        ],
     ],
 
     'callbacks' => [
@@ -92,43 +67,21 @@ $form = [
         'fail' => 'form_fail'
     ],
     'validators' => [
-        'validate_fields_match' => [
-            'password',
-            'password2'
-        ]
+        'validate_login'
     ]
 ];
 
+function form_success($filtered_input, &$form) {
+    print 'Sveikinu, tu prisiloginai!';
+    $_SESSION = $filtered_input;
+    var_dump($_SESSION);
+}
 
+function form_fail($filtered_input, &$form) {
+    print 'Neprisiloginai...';
+}
 
 $filtered_input = get_form_input($form);
-//if (!empty($filtered_input)) {
-//    validate_form($filtered_input, $form, $modelDrinks);
-//}
-function form_success($filtered_input, &$form)
-{
-    $form['fields']['password2']['error'] = 'Registracija sekminga!';
-    $vartotojas = new App\Users\User($filtered_input);
-    $modelUseris = new App\Users\Model();
-    $modelUseris->insert($vartotojas);
-
-}
-
-function form_fail()
-{
-    print 'fail';
-}
-
-function validate_mail($filtered_input, &$field)
-{
-    $modelUser = new App\Users\Model();
-    $users = $modelUser->get(['email' => $filtered_input]);
-    if ($users) {
-        $field['error'] = 'toks mailas egzistuoja!';
-        return false;
-    }
-    return true;
-}
 
 switch (get_form_action()) {
     case 'submit':
@@ -140,8 +93,8 @@ switch (get_form_action()) {
         }
 }
 
-
 ?>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -154,9 +107,8 @@ switch (get_form_action()) {
     <script defer src="media/js/app.js"></script>
 </head>
 <body>
-
 <?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
-<h1>Registracijos forma:</h1>
+<h1>Login forma:</h1>
 <div class="content">
     <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
 </div>

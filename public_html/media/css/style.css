@@ -179,3 +179,8 @@ body {
 div.active a {
 	/*color: black;*/
 }
+
+h1, h2 {
+    text-align: center;
+    color: darkgreen;
+}

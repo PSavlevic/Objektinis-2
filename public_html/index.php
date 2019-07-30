@@ -10,24 +10,11 @@ require '../bootloader.php';
 $nav = [
     'left' => [
         ['url' => '/index.php', 'title' => 'Home'],
-         ['url' => '/register.php', 'title' => 'Register']
+        ['url' => '/register.php', 'title' => 'Register'],
+        ['url' => '/login.php', 'title' => 'Login'],
+        ['url' => '/logout.php', 'title' => 'Logout']
     ]
 ];
-
-class Test
-{
-    public static $db = 0;
-    public $props;
-
-    public function  __construct()
-    {
-        self::$db++;
-        var_dump(self::$db);
-    }
-}
-
-$test = new Test();
-$test2 = new Test();
 
 
 //
@@ -242,6 +229,9 @@ $test2 = new Test();
 <div class="content">
     <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
 </div>
+
+<h1>Welcome to the best site</h1>
+<h2>Home Page</h2>
 
 <!--<div>-->
 <!--    --><?php //foreach ($drinks as $key => $drink): ?>
