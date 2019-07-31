@@ -16,15 +16,15 @@ $nav = [
     ]
 ];
 
-$whiskey = new \App\Drinks\StrongDrink();
-$whiskey->setAmount(700);
-$whiskey->drink();
-var_dump($whiskey->getAmount());
+//$whiskey = new \App\Drinks\StrongDrink();
+//$whiskey->setAmount(700);
+//$whiskey->drink();
+//var_dump($whiskey->getAmount());
 
 $beer = new \App\Drinks\LightDrink();
-$beer->setAmount(1000);
-$beer->drink();
-var_dump($beer->getAmount());
+$whiskey = new \App\Drinks\StrongDrink();
+
+//var_dump($beer->getImage());
 
 
 //abstract class Car
@@ -280,7 +280,8 @@ var_dump($beer->getAmount());
 </div>
 
 <h1>Welcome to the best site</h1>
-<h2>Home Page</h2>
+<h2>Pavel ir Co.</h2>
+
 
 <!--<div>-->
 <!--    --><?php //foreach ($drinks as $key => $drink): ?>
