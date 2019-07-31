@@ -4,7 +4,6 @@ use App\Users\User;
 use App\Users\Model;
 use Core\FileDB;
 
-
 require '../bootloader.php';
 
 $nav = [
@@ -16,12 +15,10 @@ $nav = [
     ]
 ];
 
-
 $modelUsers = new App\Users\Model();
 
 //$testasApp = \App\App::$db->getData();
 //var_dump($testasApp);
-
 
 $form = [
     'attr' => [
@@ -99,8 +96,6 @@ $form = [
     ]
 ];
 
-
-
 $filtered_input = get_form_input($form);
 //if (!empty($filtered_input)) {
 //    validate_form($filtered_input, $form, $modelDrinks);
@@ -111,7 +106,6 @@ function form_success($filtered_input, &$form)
     $vartotojas = new App\Users\User($filtered_input);
     $modelUseris = new App\Users\Model();
     $modelUseris->insert($vartotojas);
-
 }
 
 function form_fail()
@@ -124,7 +118,7 @@ function validate_mail($filtered_input, &$field)
     $modelUser = new App\Users\Model();
     $users = $modelUser->get(['email' => $filtered_input]);
     if ($users) {
-        $field['error'] = 'toks mailas egzistuoja!';
+        $field['error'] = 'toks mailas jau egzistuoja!';
         return false;
     }
     return true;

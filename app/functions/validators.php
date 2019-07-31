@@ -20,11 +20,10 @@ function validate_login($filtered_input, &$form)
 
 function validate_fields_match($filtered_input, &$form, $validator)
 {
-    var_dump($filtered_input);
     $pirmas_passwordas = $filtered_input['password'];
     foreach ($validator as $value) {
         if ($filtered_input[$value] !== $pirmas_passwordas) {
-            var_dump($filtered_input[$value]);
+//            var_dump($filtered_input[$value]);
             $form['fields']['password2']['error'] = "slaptazodziai nesutampa ";
             return false;
             break;

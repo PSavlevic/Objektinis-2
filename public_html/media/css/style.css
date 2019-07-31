@@ -124,6 +124,11 @@ body {
     font-weight: bold;
 }
 
+.nav-wrapper a:hover {
+    text-decoration: underline;
+    transition: all .3s ease-in-out;
+}
+
 .table-wrapper {
 	padding: 20px 0;
 }
@@ -183,4 +188,5 @@ div.active a {
 h1, h2 {
     text-align: center;
     color: darkgreen;
+    margin: 0;
 }

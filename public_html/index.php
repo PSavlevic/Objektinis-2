@@ -17,6 +17,51 @@ $nav = [
 ];
 
 
+abstract class Car
+{
+    protected $manufacturer;
+    protected $model;
+    protected $year;
+
+    abstract protected function drive();
+
+    public function __construct($manufacturer, $model, $year)
+    {
+        $this->manufacturer = $manufacturer;
+        $this->model = $model;
+        $this->year = $year;
+    }
+}
+
+abstract class Honda extends Car
+{
+    public function __construct($model, $year)
+    {
+        parent::__construct('Honda', $model, $year);
+    }
+
+}
+
+class HondaCivic extends Honda
+{
+    public function __construct($year)
+    {
+        parent::__construct('Civic', $year);
+    }
+
+    public function drive()
+    {
+        print 'Honda Civic juda';
+    }
+}
+
+$honda = new HondaCivic(2000);
+$honda->drive();
+
+
+die();
+
+
 //
 //$db = new Core\FileDB(DB_FILE);
 //$modelDrinks = new \App\Drinks\Model($db);
@@ -179,9 +224,6 @@ $nav = [
 //]);
 
 
-
-
-
 //////
 //$fileDB = new Core\FileDB(DB_FILE);
 //$fileDB->load();
@@ -189,8 +231,6 @@ $nav = [
 ////
 //$fileDB->insertRow('drinks', $drink->getData());
 //$var  = $fileDB->getRowsWhere('drinks', ['abarot' => 4.7]);
-
-
 
 
 //$modelDrinks->insert($drink_absent);
@@ -208,7 +248,6 @@ $nav = [
 //$drink = new App\Drinks\Drink([
 //$filtered_input;
 //]);
-
 
 
 ?>
