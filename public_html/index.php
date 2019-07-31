@@ -16,50 +16,60 @@ $nav = [
     ]
 ];
 
+$whiskey = new \App\Drinks\StrongDrink();
+$whiskey->setAmount(700);
+$whiskey->drink();
+var_dump($whiskey->getAmount());
 
-abstract class Car
-{
-    protected $manufacturer;
-    protected $model;
-    protected $year;
-
-    abstract protected function drive();
-
-    public function __construct($manufacturer, $model, $year)
-    {
-        $this->manufacturer = $manufacturer;
-        $this->model = $model;
-        $this->year = $year;
-    }
-}
-
-abstract class Honda extends Car
-{
-    public function __construct($model, $year)
-    {
-        parent::__construct('Honda', $model, $year);
-    }
-
-}
-
-class HondaCivic extends Honda
-{
-    public function __construct($year)
-    {
-        parent::__construct('Civic', $year);
-    }
-
-    public function drive()
-    {
-        print 'Honda Civic juda';
-    }
-}
-
-$honda = new HondaCivic(2000);
-$honda->drive();
+$beer = new \App\Drinks\LightDrink();
+$beer->setAmount(1000);
+$beer->drink();
+var_dump($beer->getAmount());
 
 
-die();
+//abstract class Car
+//{
+//    protected $manufacturer;
+//    protected $model;
+//    protected $year;
+//
+//    abstract protected function drive();
+//
+//    public function __construct($manufacturer, $model, $year)
+//    {
+//        $this->manufacturer = $manufacturer;
+//        $this->model = $model;
+//        $this->year = $year;
+//    }
+//}
+//
+//abstract class Honda extends Car
+//{
+//    public function __construct($model, $year)
+//    {
+//        parent::__construct('Honda', $model, $year);
+//    }
+//
+//}
+//
+//class HondaCivic extends Honda
+//{
+//    public function __construct($year)
+//    {
+//        parent::__construct('Civic', $year);
+//    }
+//
+//    public function drive()
+//    {
+//        print 'Honda Civic juda';
+//    }
+//}
+//
+//$honda = new HondaCivic(2000);
+//$honda->drive();
+//
+//
+//die();
 
 
 //
