@@ -10,6 +10,7 @@ require '../bootloader.php';
 $nav = [
     'left' => [
         ['url' => '/index.php', 'title' => 'Home'],
+        ['url' => '/drinks.php', 'title' => 'Drinks'],
         ['url' => '/register.php', 'title' => 'Register'],
         ['url' => '/login.php', 'title' => 'Login'],
         ['url' => '/logout.php', 'title' => 'Logout']
@@ -24,49 +25,47 @@ $nav = [
 $beer = new \App\Drinks\LightDrink();
 $whiskey = new \App\Drinks\StrongDrink();
 
-//var_dump($beer->getImage());
 
+abstract class Car
+{
+    protected $manufacturer;
+    protected $model;
+    protected $year;
 
-//abstract class Car
-//{
-//    protected $manufacturer;
-//    protected $model;
-//    protected $year;
-//
-//    abstract protected function drive();
-//
-//    public function __construct($manufacturer, $model, $year)
-//    {
-//        $this->manufacturer = $manufacturer;
-//        $this->model = $model;
-//        $this->year = $year;
-//    }
-//}
-//
-//abstract class Honda extends Car
-//{
-//    public function __construct($model, $year)
-//    {
-//        parent::__construct('Honda', $model, $year);
-//    }
-//
-//}
-//
-//class HondaCivic extends Honda
-//{
-//    public function __construct($year)
-//    {
-//        parent::__construct('Civic', $year);
-//    }
-//
-//    public function drive()
-//    {
-//        print 'Honda Civic juda';
-//    }
-//}
-//
-//$honda = new HondaCivic(2000);
-//$honda->drive();
+    abstract protected function drive();
+
+    public function __construct($manufacturer, $model, $year)
+    {
+        $this->manufacturer = $manufacturer;
+        $this->model = $model;
+        $this->year = $year;
+    }
+}
+
+abstract class Honda extends Car
+{
+    public function __construct($model, $year)
+    {
+        parent::__construct('Honda', $model, $year);
+    }
+
+}
+
+class HondaCivic extends Honda
+{
+    public function __construct($year)
+    {
+        parent::__construct('Civic', $year);
+    }
+
+    public function drive()
+    {
+        print 'Honda Civic juda';
+    }
+}
+
+$honda = new HondaCivic(2000);
+$honda->drive();
 //
 //
 //die();
@@ -282,6 +281,9 @@ $whiskey = new \App\Drinks\StrongDrink();
 <h1>Welcome to the best site</h1>
 <h2>Pavel ir Co.</h2>
 
+
+<img src="<?php print $beer->getImage(); ?>" alt="beer">
+<img src="<?php print $whiskey->getImage(); ?>" alt="beer">
 
 <!--<div>-->
 <!--    --><?php //foreach ($drinks as $key => $drink): ?>

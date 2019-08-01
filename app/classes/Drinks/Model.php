@@ -33,7 +33,12 @@ class Model
         $rows = App::$db->getRowsWhere($this->table_name, $conditions);
         foreach ($rows as $row_id => $row_data) {
             $row_data['id'] = $row_id;
-            $drinks[] = new Drink($row_data);
+//            $drinks[] = new Drink($row_data);
+            if ($row_data['abarot'] < 30){
+                $drinks[] = new LightDrink($row_data);
+            }else{
+                $drinks[] = new StrongDrink($row_data);
+            }
         }
         return $drinks;
     }

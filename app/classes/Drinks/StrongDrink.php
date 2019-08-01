@@ -11,10 +11,9 @@ class StrongDrink extends Drink
 
     public function getImage()
     {
-        if($this->getImage() !== null) {
+        if (parent::getImage()) {
             return parent::getImage();
-        } else {
-            return 'https://lt1.pigugroup.eu/colours/219/837/20/21983720/447ce40e9b567ecbbe8b0daa598fa6f8_large.jpg';
         }
+        return 'http://berlat.lv/system/products/main_images/000/000/030/medium/Bonus_07.png?1534232122';
     }
 }

@@ -5,8 +5,8 @@
 }
 
 * {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -50,7 +50,7 @@ body {
     padding: 5px;
     box-sizing: border-box;  
     font-weight: bold;
-	background: white;
+    background: white;
     width: 50%;
 }
 
@@ -81,8 +81,8 @@ body {
 
 .form-wrapper .button-wrapper button:hover {
     border: 1px solid white;
-	background: rgb(180, 20, 70);
-	color: white;
+    background: rgb(180, 20, 70);
+    color: white;
 }
 
 /* ### Other Styles ### */
@@ -91,102 +91,125 @@ body {
     top: calc(50vh - 150px);
     left: 10%;
     padding: 60px;
-	border-radius: 50%;
+    border-radius: 50%;
     background: rgb(255, 220, 220);
-	width: 100px;
-	height: 100px;
-	text-align: center;
+    width: 100px;
+    height: 100px;
+    text-align: center;
 }
 
 .message span.text {
     background: rgb(210, 240, 245);
     font-weight: bold;
     padding: 20px;
-	display: block;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 .nav-wrapper {
     background: white;
     display: flex;
     justify-content: flex-start;
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .nav-wrapper a {
     display: block;
     padding: 10px;
-	text-decoration: none;
-	color: #333;
+    text-decoration: none;
+    color: #333;
     text-align: center;
     font-weight: bold;
 }
 
-.nav-wrapper a:hover {
-    text-decoration: underline;
-    transition: all .3s ease-in-out;
-}
-
 .table-wrapper {
-	padding: 20px 0;
+    padding: 20px 0;
 }
 
 .table-wrapper table {
-	width: 600px;
-	margin: 0 auto;
-	text-align: center;
+    width: 600px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .table-wrapper table tr:hover td {
-	background: rgb(180, 20, 70);
-	color: white;
+    background: rgb(180, 20, 70);
+    color: white;
 }
 
 .table-wrapper table,
 .table-wrapper td,
 .table-wrapper th {
-	box-sizing: border-box;
-	border: 1px solid black;
-	border-collapse: collapse;
-	background: white;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-collapse: collapse;
+    background: white;
 }
 
 .table-wrapper th {
-	font-size: 20px;
-	font-weight: bold;
-	letter-spacing: 2px;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
 .table-wrapper tbody td span:not(:last-child):after {
-	content: ', ';
+    content: ', ';
 }
 
 .nav-wrapper .void {
-	width: 100%;
-	border-bottom: 1px solid #333;
+    width: 100%;
+    border-bottom: 1px solid #333;
 }
 
 .nav-wrapper .field-wrapper {
-	border-bottom: 1px solid #333;
-	border-right: 1px solid white;
-	border-left: 1px soldi white;
-	min-width: 120px;
+    border-bottom: 1px solid #333;
+    border-right: 1px solid white;
+    border-left: 1px soldi white;
+    min-width: 120px;
 }
 
 .nav-wrapper div.active {
-	border-left: 1px solid #333;
-	border-right: 1px solid #333;
-	border-bottom: 1px solid white;
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+    border-bottom: 1px solid white;
 }
 
 div.active a {
-	/*color: black;*/
+    /*color: black;*/
 }
-
-h1, h2 {
+.gerimai{
+    max-width: 60%;
+    margin: 0 auto;
+    display:flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+}
+.gerimas{
+    border: 1px solid black;
+    display: inline-block;
+    padding: 20px;
     text-align: center;
-    color: darkgreen;
-    margin: 0;
+    
+}
+.gerimas h1:nth-child(1){
+    color:gold;
+}
+.gerimas h1:nth-child(2){
+    color:black;
+}
+.gerimas h1:nth-child(3){
+    color:red;
+}
+.gerimas img{
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+}
+.vakaro-meniu{
+    text-align: center;
+    text-decoration: underline;
+    color:gold;
 }

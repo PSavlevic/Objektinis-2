@@ -1,1 +1,1 @@
-{"users":[{"name":"Pavel","email":"frooktik@gmail.com","password":"123"}]}
+{"drinks":[{"id":0,"name":"Absent","amount_ml":450,"abarot":70,"image":"https:\/\/cdn1.wine-searcher.net\/images\/labels\/47\/12\/10924712.jpg"},{"id":1,"name":"Finlandia","amount_ml":500,"abarot":40,"image":"https:\/\/cdn.diffords.com\/contrib\/bws\/2017\/10\/59db863511455.jpg"},{"id":2,"name":"Svyturys","amount_ml":400,"abarot":5,"image":"https:\/\/lt1.pigugroup.eu\/colours\/219\/837\/20\/21983720\/447ce40e9b567ecbbe8b0daa598fa6f8_large.jpg"}],"users":[]}
