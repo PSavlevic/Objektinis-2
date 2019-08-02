@@ -49,7 +49,7 @@ class Cookie extends Abstracts\Cookie
         } else {
             trigger_error('Nepavyko dekodinti Bl*t!', E_USER_WARNING);
         }
-        return $array = [];
+        return [];
     }
 
     /**
@@ -80,6 +80,9 @@ class Cookie extends Abstracts\Cookie
      */
     public function delete(): void
     {
-        // TODO: Implement delete() method.
+        if ($_COOKIE[$this->name]) {
+            setcookie($this->name, null, -1, "/");
+            return true;
+        }
     }
 }
