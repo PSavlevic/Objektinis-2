@@ -81,6 +81,7 @@ class Cookie extends Abstracts\Cookie
     public function delete(): void
     {
         if ($_COOKIE[$this->name]) {
+            unset($_COOKIE[$this->name]);
             setcookie($this->name, null, -1, "/");
             return true;
         }
