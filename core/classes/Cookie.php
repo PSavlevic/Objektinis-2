@@ -1,8 +1,18 @@
 <?php
+
 namespace Core;
 
-class Cookie extends Abstracts\Cookie {
-    public function __construct($name) {
+class Cookie extends Abstracts\Cookie
+{
+    /**
+     * Cookie pavadinimas
+     *
+     * Jis naudojamas tiek nuskaitant duomenis iš
+     * $_COOKIE, tiek funkcijoje setcookie
+     * @var string
+     */
+    public function __construct($name)
+    {
         $this->name = $name;
     }
 
@@ -11,7 +21,11 @@ class Cookie extends Abstracts\Cookie {
      */
     public function exists(): bool
     {
-        // TODO: Implement exists() method.
+        if (isset($_COOKIE[$this->name])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

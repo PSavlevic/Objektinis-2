@@ -18,6 +18,8 @@ abstract class Cookie {
      * Turi patikrinti ar cookie duotu pavadinimu egzistuoja
      */
     abstract public function exists(): bool;
+
+
     /**
      * Turi return'inti json_decode'intą cookie'o
      * turinį.
