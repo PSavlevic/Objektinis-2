@@ -43,7 +43,13 @@ class Cookie extends Abstracts\Cookie
      */
     public function read(): array
     {
-        // TODO: Implement read() method.
+        $array = json_decode($_COOKIE[$this->name], true);
+        if ($array) {
+            return $array;
+        } else {
+            trigger_error('Nepavyko dekodinti Bl*t!', E_USER_WARNING);
+        }
+        return $array = [];
     }
 
     /**
@@ -64,8 +70,8 @@ class Cookie extends Abstracts\Cookie
      */
     public function save(array $data, int $expires_in = 3600): void
     {
-            $string = json_encode($data);
-            setcookie($this->name, $string, time() + $expires_in, "/");
+        $string = json_encode($data);
+        setcookie($this->name, $string, time() + $expires_in, "/");
     }
 
     /**
