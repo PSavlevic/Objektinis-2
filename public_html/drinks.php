@@ -135,6 +135,7 @@ switch (get_form_action()) {
 $modelDrinks = new App\Drinks\Model();
 $drinks = $modelDrinks->get();
 
+
 ?>
 <html>
 <head>
@@ -152,7 +153,7 @@ $drinks = $modelDrinks->get();
 
 <div class="content">
     <h1 class="vakaro-meniu">Vakaro MENIU</h1>
-
+    <?php var_dump($_POST); ?>
     <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
 
     <div class="gerimai">
@@ -166,5 +167,31 @@ $drinks = $modelDrinks->get();
         <?php endforeach; ?>
     </div>
 </div>
+
+<script>
+    'use strict';
+
+    document.getElementById("drinks-form").addEventListener("submit", e => {
+        e.preventDefault();
+
+        fetch("./drinks.php", {
+            method: "POST",
+            body: {
+                gerimas: e.target.gerimas.value,
+                action: "submit"
+            }
+        })
+            .then(response => {
+                response.text().then(text => {
+                    console.log("done");
+                    document.querySelector("html").innerHTML = text;
+                    //document.getElementsByTagName('html').innerHTML = text;
+                });
+        })
+            .catch(e => {
+                console.log(e);
+            })
+    });
+</script>
 </body>
 </html>

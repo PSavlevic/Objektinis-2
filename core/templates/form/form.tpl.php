@@ -1,6 +1,6 @@
 <?php if (isset($form) && !empty($form)): ?>
     <div class='form-wrapper'>
-        <form <?php print html_attr($form['attr'] ?? ['method' => 'POST']); ?>>
+        <form id="drinks-form" <?php print html_attr($form['attr'] ?? ['method' => 'POST']); ?>>
 
             <!--Start Field Generation-->
             <?php foreach ($form['fields'] as $field_id => $field): ?>
