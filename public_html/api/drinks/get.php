@@ -6,26 +6,23 @@ $drinksModel = new \App\Drinks\Model();
 $conditions = [];
 
 if ($_POST['conditions'] ?? false) {
-    $conditions = json_decode($_POST['conditions']);
+    $conditions = json_decode($_POST['conditions'], true);
 }
+
+$response = [
+    "status" => null,
+    "data" => [],
+];
 
     $drinks = $drinksModel->get($conditions);
-if ($drinks) {
-    $drinks_array = [];
+if ($drinks !== false) {
     foreach ($drinks as $drink_id => $drink) {
-        $drinks_array[] = $drink->getData();
+        $response['data'][] = $drink->getData();
     }
-
-    $json_arr = [
-        "status" => "success",
-        "data" => $drinks_array,
-    ];
+    $response['status'][] = 'success';
 
 } else {
-    $json_arr = [
-        "status" => "fail",
-        "data" => [],
-    ];
+    $response['status'][] = 'fail';
 }
 
-print json_encode($json_arr);
+print json_encode($response);
