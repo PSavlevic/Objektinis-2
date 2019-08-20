@@ -3,6 +3,7 @@
 use App\Drinks\Drink;
 use App\Drinks\Model;
 use App\Users\User;
+use Core\View;
 
 
 require '../bootloader.php';
@@ -78,77 +79,77 @@ $honda->drive();
 //$testasApp = \App\App::$db->getData();
 //var_dump($testasApp);
 //
-//$form = [
-//    'attr' => [
-//        //'action' => '', Nebūtina, jeigu action yra ''
-//        'method' => 'POST',
-//    ],
-//    'fields' => [
-//        'name' => [
-//            'label' => 'Gerimo pavadinimas',
-//            'type' => 'text',
-//            'extra' => [
-//                'validators' => [
-//                    'validate_not_empty',
-//                ]
-//            ],
-//        ],
-//        'amount_ml' => [
-//            'label' => 'Amount(ml)',
-//            'type' => 'text',
-//            'extra' => [
-//                'validators' => [
-//                    'validate_not_empty',
-//                    //validate float
-//                ]
-//            ],
-//        ],
-//        'abarot' => [
-//            'label' => 'Abarotai(%)',
-//            'type' => 'text',
-//            'extra' => [
-//                'validators' => [
-//                    'validate_not_empty'
-//                ]
-//            ],
-//        ],
-//        'image' => [
-//            'label' => 'Image link',
-//            'type' => 'text',
-//            'extra' => [
-//                'validators' => [
-//                    'validate_not_empty',
-//                ]
-//            ],
-//        ],
-//    ],
-//    'buttons' => [
-//        'submit' => [
-//            'title' => 'Prideti gerima',
-//            'extra' => [
-//                'attr' => [
-//                    'class' => 'red-btn'
-//                ]
-//            ]
-//        ],
-//        'delete' => [
-//            'title' => 'Isgerti viska',
-//            'extra' => [
-//                'attr' => [
-//                    'class' => 'blue-btn'
-//                ]
-//            ]
-//        ],
-//    ],
-//
-//    'callbacks' => [
-//        'success' => 'form_success',
-//        'fail' => 'form_fail'
-//    ],
-//    'validators' => [
-//        'validate_login'
-//    ]
-//];
+$form = [
+    'attr' => [
+        //'action' => '', Nebūtina, jeigu action yra ''
+        'method' => 'POST',
+    ],
+    'fields' => [
+        'name' => [
+            'label' => 'Gerimo pavadinimas',
+            'type' => 'text',
+            'extra' => [
+                'validators' => [
+                    'validate_not_empty',
+                ]
+            ],
+        ],
+        'amount_ml' => [
+            'label' => 'Amount(ml)',
+            'type' => 'text',
+            'extra' => [
+                'validators' => [
+                    'validate_not_empty',
+                    //validate float
+                ]
+            ],
+        ],
+        'abarot' => [
+            'label' => 'Abarotai(%)',
+            'type' => 'text',
+            'extra' => [
+                'validators' => [
+                    'validate_not_empty'
+                ]
+            ],
+        ],
+        'image' => [
+            'label' => 'Image link',
+            'type' => 'text',
+            'extra' => [
+                'validators' => [
+                    'validate_not_empty',
+                ]
+            ],
+        ],
+    ],
+    'buttons' => [
+        'submit' => [
+            'title' => 'Prideti gerima',
+            'extra' => [
+                'attr' => [
+                    'class' => 'red-btn'
+                ]
+            ]
+        ],
+        'delete' => [
+            'title' => 'Isgerti viska',
+            'extra' => [
+                'attr' => [
+                    'class' => 'blue-btn'
+                ]
+            ]
+        ],
+    ],
+
+    'callbacks' => [
+        'success' => 'form_success',
+        'fail' => 'form_fail'
+    ],
+    'validators' => [
+        'validate_login'
+    ]
+];
 //
 //
 //$filtered_input = get_form_input($form);
@@ -186,60 +187,61 @@ $honda->drive();
 //
 //$rows_with_balls = $db->getRowsWhere('test_table', ['balls' => true]);
 ////var_dump('Rows with balls:', $rows_with_balls);
-//
-//$drink = new App\Drinks\Drink();
-//$drink->setName('mano neimas');
-//$drink->setAmount(2);
-//$drink->setAbarot(39.5);
-//$drink->setImage('/img');
-//$drink->setData([
-//    'name' => 'Moscovskaja',
-//    'amount_ml' => 3,
-//    'abarot' => 40,
-//    'askdf' => 'sdf',
-//    'image' => 'IMGLINK'
-//]);
+
+$drink = new App\Drinks\Drink();
+$drink->setName('mano neimas');
+$drink->setAmount(2);
+$drink->setAbarot(39.5);
+$drink->setImage('/img');
+$drink->setData([
+    'name' => 'Moscovskaja',
+    'amount_ml' => 3,
+    'abarot' => 40,
+    'askdf' => 'sdf',
+    'image' => 'IMGLINK'
+]);
 
 //var_dump('Drink:', $drink);
 
 
-//$drink_finland = new App\Drinks\Drink([
-//    //'id' => 0,
-//    'name' => 'Finlandia Vodke',
-//    'amount_ml' => 750,
-//    'abarot' => 40,
-//    'image' => 'https://cdn.diffords.com/contrib/bws/2017/10/59db863511455.jpg'
-//]);
-//$drink_absent = new App\Drinks\Drink([
-//    //'id' => 0,
-//    'name' => 'Absent',
-//    'amount_ml' => 500,
-//    'abarot' => 70,
-//    'image' => 'https://cdn1.wine-searcher.net/images/labels/47/12/10924712.jpg'
-//]);
-//$drink_corona = new App\Drinks\Drink([
-//    //'id' => 0,
-//    'name' => 'Corona',
-//    'amount_ml' => 350,
-//    'abarot' => 4.5,
-//    'image' => 'https://products2.imgix.drizly.com/ci-corona-extra-2b48031ca2c738b1.jpeg?auto=format%2Ccompress&fm=jpeg&q=20'
-//]);
-//$drink_heineken = new App\Drinks\Drink([
-//    //'id' => 0,
-//    'name' => 'Heineken',
-//    'amount_ml' => 350,
-//    'abarot' => 4.5,
-//    'image' => 'https://products1.imgix.drizly.com/ci-heineken-lager-6ea7dedfaaced647.jpeg?auto=format%2Ccompress&fm=jpeg&q=20'
-//]);
+$drink_finland = new App\Drinks\Drink([
+    //'id' => 0,
+    'name' => 'Finlandia Vodke',
+    'amount_ml' => 750,
+    'abarot' => 40,
+    'image' => 'https://cdn.diffords.com/contrib/bws/2017/10/59db863511455.jpg'
+]);
+$drink_absent = new App\Drinks\Drink([
+    //'id' => 0,
+    'name' => 'Absent',
+    'amount_ml' => 500,
+    'abarot' => 70,
+    'image' => 'https://cdn1.wine-searcher.net/images/labels/47/12/10924712.jpg'
+]);
+$drink_corona = new App\Drinks\Drink([
+    //'id' => 0,
+    'name' => 'Corona',
+    'amount_ml' => 350,
+    'abarot' => 4.5,
+    'image' => 'https://products2.imgix.drizly.com/ci-corona-extra-2b48031ca2c738b1.jpeg?auto=format%2Ccompress&fm=jpeg&q=20'
+]);
+$drink_heineken = new App\Drinks\Drink([
+    //'id' => 0,
+    'name' => 'Heineken',
+    'amount_ml' => 350,
+    'abarot' => 4.5,
+    'image' => 'https://products1.imgix.drizly.com/ci-heineken-lager-6ea7dedfaaced647.jpeg?auto=format%2Ccompress&fm=jpeg&q=20'
+]);
 
 
-//////
-//$fileDB = new Core\FileDB(DB_FILE);
-//$fileDB->load();
-//$fileDB->createTable('drinks');
+
 ////
-//$fileDB->insertRow('drinks', $drink->getData());
-//$var  = $fileDB->getRowsWhere('drinks', ['abarot' => 4.7]);
+$fileDB = new Core\FileDB(DB_FILE);
+$fileDB->load();
+$fileDB->createTable('drinks');
+//
+$fileDB->insertRow('drinks', $drink->getData());
+$var  = $fileDB->getRowsWhere('drinks', ['abarot' => 4.7]);
 
 
 //$modelDrinks->insert($drink_absent);
@@ -247,7 +249,10 @@ $honda->drive();
 //$modelDrinks->insert($drink_heineken);
 //$modelDrinks->insert($drink_finland);
 
-//$filtered_input = get_form_input($form);
+
+
+
+$filtered_input = get_form_input($form);
 //validate_form($filtered_input, $form);
 //
 //$drinks = $modelDrinks->get();
@@ -257,7 +262,8 @@ $honda->drive();
 //$drink = new App\Drinks\Drink([
 //$filtered_input;
 //]);
-
+$newRegisterObject = new Core\View($form);
+$newNavRegisterObject = new Core\View($nav);
 
 ?>
 <html>
@@ -272,10 +278,10 @@ $honda->drive();
     <script defer src="media/js/app.js"></script>
 </head>
 <body>
-<?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
+<?php print $newNavRegisterObject->render(ROOT . '/app/templates/navigation.tpl.php'); ?>
 
 <div class="content">
-    <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
+    <?php print $newRegisterObject->render(ROOT . '/core/templates/form/form.tpl.php'); ?>
 </div>
 
 <h1>Welcome to the best site</h1>
@@ -285,13 +291,13 @@ $honda->drive();
 <img src="<?php print $beer->getImage(); ?>" alt="beer">
 <img src="<?php print $whiskey->getImage(); ?>" alt="beer">
 
-<!--<div>-->
+<div>
 <!--    --><?php //foreach ($drinks as $key => $drink): ?>
 <!--        <h1>--><?php //print $drink->getName(); ?><!--</h1>-->
 <!--        <h2>--><?php //print $drink->getAmount(); ?><!--</h2>-->
 <!--        <h3>--><?php //print $drink->getAbarot(); ?><!--</h3>-->
 <!--        <img src="--><?php //print $drink->getImage(); ?><!--" alt="foto">-->
 <!--    --><?php //endforeach; ?>
-<!--</div>-->
+</div>
 </body>
 </html>

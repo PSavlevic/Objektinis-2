@@ -1,6 +1,7 @@
 <?php
 
 use App\Drinks\Drink;
+use Core\View;
 
 require '../bootloader.php';
 
@@ -21,14 +22,14 @@ function insert_drinks()
     $drink_finland = new App\Drinks\Drink([
         //'id' => 0,
         'name' => 'Finlandia',
-        'amount_ml' => 750,
+        'amount_ml' => 7500,
         'abarot' => 40,
         'image' => 'https://cdn.diffords.com/contrib/bws/2017/10/59db863511455.jpg'
     ]);
     $drink_absent = new App\Drinks\Drink([
         //'id' => 0,
         'name' => 'Absent',
-        'amount_ml' => 500,
+        'amount_ml' => 5000,
         'abarot' => 70,
         'image' => 'https://cdn1.wine-searcher.net/images/labels/47/12/10924712.jpg'
     ]);
@@ -42,7 +43,7 @@ function insert_drinks()
     $drink_cider = new App\Drinks\Drink([
         //'id' => 0,
         'name' => 'Sidras',
-        'amount_ml' => 380,
+        'amount_ml' => 3800,
         'abarot' => 4,
         'image' => 'https://products3.imgix.drizly.com/ci-angry-orchard-green-apple-cider-48a085b2c6221f9e.jpeg?auto=format%2Ccompress&dpr=2&fm=jpeg&h=240&q=20'
     ]);
@@ -51,6 +52,7 @@ function insert_drinks()
     $drinksModel->insert($drink_beer);
     $drinksModel->insert($drink_cider);
 }
+//insert_drinks();
 
 function get_form()
 {
@@ -135,6 +137,8 @@ switch (get_form_action()) {
 $modelDrinks = new App\Drinks\Model();
 $drinks = $modelDrinks->get();
 
+$newRegisterObject = new Core\View($form);
+$newNavRegisterObject = new Core\View($nav);
 
 ?>
 <html>
@@ -149,12 +153,12 @@ $drinks = $modelDrinks->get();
     <script defer src="media/js/app.js"></script>
 </head>
 <body>
-<?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
+<?php print $newNavRegisterObject->render(ROOT . '/app/templates/navigation.tpl.php'); ?>
 
 <div class="content">
     <h1 class="vakaro-meniu">Vakaro MENIU</h1>
-    <?php var_dump($_POST); ?>
-    <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
+<!--    --><?php //var_dump($_POST); ?>
+    <?php print $newRegisterObject->render(ROOT . '/core/templates/form/form.tpl.php'); ?>
 
     <div class="gerimai">
         <?php foreach ($drinks as $drink): ?>
@@ -170,28 +174,65 @@ $drinks = $modelDrinks->get();
 
 <script>
     'use strict';
+    // Funkcija registruojanti form'os submit'o listenerį
+    function addListener() {
+        // Paselect'inam form'ą, kurios ID yra drinks-form
+        document.getElementById("drinks-form")
+        // uždedam jai event'o listenerį, kuris suveiks ją submitinus
+            .addEventListener("submit", e => {
 
-    document.getElementById("drinks-form").addEventListener("submit", e => {
-        e.preventDefault();
+                // default'inė event'o f-ija, kuri užkerta (preventina)
+                // puslapio perkrovimą submit'inus formą
+                e.preventDefault();
 
-        fetch("./drinks.php", {
-            method: "POST",
-            body: {
-                gerimas: e.target.gerimas.value,
-                action: "submit"
-            }
-        })
-            .then(response => {
-                response.text().then(text => {
-                    console.log("done");
-                    document.querySelector("html").innerHTML = text;
-                    //document.getElementsByTagName('html').innerHTML = text;
-                });
-        })
-            .catch(e => {
-                console.log(e);
-            })
-    });
+                // Sukuriam default'ini objektą FormData
+                // Tai yra "tuščia dėžė", kurią nusiųsime
+                // duomenis POST metodu. Į ją append'inam duomenis
+                let formData = new FormData();
+
+                // Paduodame paspausto mygtuko duomenis
+                formData.append('action', 'submit');
+                // Kadangi tik po paspaudimo žinome, kokį gėrimą pasirinko
+                // useris, appendiname select'o su name "gerimas" value:
+                formData.append('gerimas', e.target.gerimas.value); // itraukiam gerimas:gerimo_id
+
+                // Fetch'as paima duomenis iš tam tikro URL'o
+                fetch("./drinks.php", {
+                    // Prieš gaunant duomenis, mes galime juos išsiųsti
+                    // tam tikru metodu. Šiuo atveju naudojame POST
+                    method: "POST",
+                    // Tai yra duomenys, kuriuos nusiunčiame į drinks.php
+                    // Naudojame formData dėl to, kad PHP tinkamai atpažintų
+                    // duomenis ir juos sudėtų į $_POST masyvą
+                    body: formData
+                })
+                // Gavus atsaką iš drinks.php, iškviečiama ši funkcija
+                    .then(response => {
+                        // Norėdami gauti tekstą (HTML) iš atsako,
+                        // naudojame šį kodą
+                        response.text().then(text => {
+                            console.log("done");
+                            // Kadangi atsako tekstas yra visas puslapio HTML
+                            // mes esamą HTML'ą perrašome su gautu (text)
+                            document.querySelector("html").innerHTML = text;
+
+                            // Kadangi perrašius HTML'ą nusimuša visi event'ų
+                            // listeneriai, reikia iš naujo užregistruoti
+                            addListener();
+                        });
+                    })
+                    .catch(e => {
+                        // Nes eik nx
+                        console.log(e);
+                    });
+            });
+    }
+
+    // Pirmo užkrovimo metu, registruojame listenerį formai
+    addListener();
+
+
+
 </script>
 </body>
 </html>

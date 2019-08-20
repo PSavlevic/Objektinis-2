@@ -1,22 +1,23 @@
 <?php
 
-use App\Users\User;
-use App\Users\Model;
-use Core\FileDB;
 use Core\View;
 
-
 require '../bootloader.php';
+//ob_start();
+//print 'testukas';
+//print 'antras testukas';
+//$output = ob_get_clean();
+//
+//var_dump($output);
 
 $nav = [
     'left' => [
         ['url' => '/index.php', 'title' => 'Home'],
         ['url' => '/register.php', 'title' => 'Register'],
         ['url' => '/login.php', 'title' => 'Login'],
-        ['url' => '/logout.php', 'title' => 'Logout']
+        ['url' => '/logout.php', 'title' => 'Logout'],
     ]
 ];
-
 
 $form = [
     'attr' => [
@@ -72,40 +73,15 @@ $form = [
     ]
 ];
 
-
-
-function form_success($filtered_input, &$form) {
-    print 'Sveikinu, tu prisiloginai!';
-    $_SESSION = $filtered_input;
-    var_dump($_SESSION);
-}
-
-function form_fail($filtered_input, &$form) {
-    print 'Neprisiloginai...';
-}
-
-$filtered_input = get_form_input($form);
-
-switch (get_form_action()) {
-    case 'submit':
-        validate_form($filtered_input, $form);
-        break;
-    case 'delete':
-        foreach ($modelUsers->get() as $drink) {
-            $modelUsers->deleteAll($drink);
-        }
-}
-
-$newLoginObject = new Core\View($form);
+$newRegisterObject = new Core\View($form);
 $newNavRegisterObject = new Core\View($nav);
 
 ?>
-
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OOP</title>
+    <title>test1</title>
     <link rel="stylesheet" href="media/css/normalize.css">
     <link rel="stylesheet" href="media/css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -113,10 +89,11 @@ $newNavRegisterObject = new Core\View($nav);
     <script defer src="media/js/app.js"></script>
 </head>
 <body>
-<?php print $newNavRegisterObject->render(ROOT . '/app/templates/navigation.tpl.php'); ?>
-<h1>Login forma:</h1>
+<?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
+
 <div class="content">
-    <?php print $newLoginObject->render(ROOT . '/core/templates/form/form.tpl.php'); ?>
+    <?php print $viewObject->render(ROOT . '/core/templates/form/form.tpl.php'); ?>
 </div>
+
 </body>
 </html>

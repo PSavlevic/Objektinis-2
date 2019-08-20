@@ -3,6 +3,7 @@
 use App\Users\User;
 use App\Users\Model;
 use Core\FileDB;
+use Core\View;
 
 require '../bootloader.php';
 
@@ -134,8 +135,8 @@ switch (get_form_action()) {
             $modelUsers->deleteAll($drink);
         }
 }
-
-
+$newRegisterObject = new Core\View($form);
+$newNavRegisterObject = new Core\View($nav);
 ?>
 <html>
 <head>
@@ -150,10 +151,10 @@ switch (get_form_action()) {
 </head>
 <body>
 
-<?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
+<?php print $newNavRegisterObject->render(ROOT . '/app/templates/navigation.tpl.php'); ?>
 <h1>Registracijos forma:</h1>
 <div class="content">
-    <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
+    <?php print $newRegisterObject->render(ROOT . '/core/templates/form/form.tpl.php'); ?>
 </div>
 </body>
 </html>
