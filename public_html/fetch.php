@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Fetch</title>
+    <link rel="stylesheet" href="media/css/normalize.css">
+    <link rel="stylesheet" href="media/css/style.css">
 </head>
 <body>
 <form id="drinks-form">
@@ -66,9 +68,9 @@
         const h1 = document.createElement("h1");
         h1.append(document.createTextNode(v.name));
         const h2 = document.createElement("h2");
-        h2.append(document.createTextNode(v.amount_ml));
+        h2.append(document.createTextNode(v.amount_ml + "ml"));
         const h3 = document.createElement("h3");
-        h3.append(document.createTextNode(v.abarot));
+        h3.append(document.createTextNode(v.abarot + "%"));
         const img = document.createElement("img");
         img.src = v.image;
         div.append(h1, h2, h3, img);

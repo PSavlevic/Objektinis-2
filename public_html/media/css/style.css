@@ -213,3 +213,31 @@ div.active a {
     text-decoration: underline;
     color:gold;
 }
+
+.wrapper {
+    width: 600px;
+    margin: 0 auto;
+}
+
+#create-form input:not([type=submit]) {
+    display: block;
+    margin-bottom: 20px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+#create-form {
+    margin: 20px;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+div {
+    text-align: center;
+}
+
+.field-error {
+    background-color: red;
+    color: #fff;
+}
