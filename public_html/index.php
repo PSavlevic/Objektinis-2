@@ -8,15 +8,28 @@ use Core\View;
 
 require '../bootloader.php';
 
-$nav = [
-    'left' => [
-        ['url' => '/index.php', 'title' => 'Home'],
-        ['url' => '/drinks.php', 'title' => 'Drinks'],
-        ['url' => '/register.php', 'title' => 'Register'],
-        ['url' => '/login.php', 'title' => 'Login'],
-        ['url' => '/logout.php', 'title' => 'Logout']
-    ]
-];
+if($_SESSION) {
+    $nav = [
+        'left' => [
+            ['url' => '/index.php', 'title' => 'Home'],
+            ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
+            ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch.php', 'title' => ' Find drink'],
+            ['url' => '/logout.php', 'title' => 'Logout']
+        ]
+    ];
+} else {
+    $nav = [
+        'left' => [
+            ['url' => '/index.php', 'title' => 'Home'],
+            ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
+            ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch.php', 'title' => ' Find drink'],
+            ['url' => '/register.php', 'title' => 'Register'],
+            ['url' => '/login.php', 'title' => 'Login'],
+        ]
+    ];
+}
 
 //$whiskey = new \App\Drinks\StrongDrink();
 //$whiskey->setAmount(700);
@@ -43,30 +56,30 @@ abstract class Car
     }
 }
 
-abstract class Honda extends Car
-{
-    public function __construct($model, $year)
-    {
-        parent::__construct('Honda', $model, $year);
-    }
-
-}
-
-class HondaCivic extends Honda
-{
-    public function __construct($year)
-    {
-        parent::__construct('Civic', $year);
-    }
-
-    public function drive()
-    {
-        print 'Honda Civic juda';
-    }
-}
-
-$honda = new HondaCivic(2000);
-$honda->drive();
+//abstract class Honda extends Car
+//{
+//    public function __construct($model, $year)
+//    {
+//        parent::__construct('Honda', $model, $year);
+//    }
+//
+//}
+//
+//class HondaCivic extends Honda
+//{
+//    public function __construct($year)
+//    {
+//        parent::__construct('Civic', $year);
+//    }
+//
+//    public function drive()
+//    {
+//        print 'Honda Civic juda';
+//    }
+//}
+//
+//$honda = new HondaCivic(2000);
+//$honda->drive();
 //
 //
 //die();

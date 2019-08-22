@@ -7,15 +7,28 @@ use Core\View;
 
 require '../bootloader.php';
 
-$nav = [
-    'left' => [
-        ['url' => '/index.php', 'title' => 'Home'],
-        ['url' => '/drinks.php', 'title' => 'Drinks'],
-        ['url' => '/register.php', 'title' => 'Register'],
-        ['url' => '/login.php', 'title' => 'Login'],
-        ['url' => '/logout.php', 'title' => 'Logout']
-    ]
-];
+if($_SESSION) {
+    $nav = [
+        'left' => [
+            ['url' => '/index.php', 'title' => 'Home'],
+            ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
+            ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch.php', 'title' => ' Find drink'],
+            ['url' => '/logout.php', 'title' => 'Logout']
+        ]
+    ];
+} else {
+    $nav = [
+        'left' => [
+            ['url' => '/index.php', 'title' => 'Home'],
+            ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
+            ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch.php', 'title' => ' Find drink'],
+            ['url' => '/register.php', 'title' => 'Register'],
+            ['url' => '/login.php', 'title' => 'Login'],
+        ]
+    ];
+}
 
 $modelUsers = new App\Users\Model();
 

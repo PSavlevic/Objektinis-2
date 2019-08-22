@@ -246,11 +246,9 @@ class FileDB
         }
         return $rows;
     }
-
     public
     function __destruct()
     {
         $this->save();
     }
-
 }

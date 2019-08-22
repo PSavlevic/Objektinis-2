@@ -5,15 +5,28 @@ use Core\View;
 
 require '../bootloader.php';
 
-$nav = [
-    'left' => [
-        ['url' => '/index.php', 'title' => 'Home'],
-        ['url' => '/drinks.php', 'title' => 'Drinks'],
-        ['url' => '/register.php', 'title' => 'Register'],
-        ['url' => '/login.php', 'title' => 'Login'],
-        ['url' => '/logout.php', 'title' => 'Logout']
-    ]
-];
+if($_SESSION) {
+    $nav = [
+        'left' => [
+            ['url' => '/index.php', 'title' => 'Home'],
+            ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
+            ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch.php', 'title' => ' Find drink'],
+            ['url' => '/logout.php', 'title' => 'Logout']
+        ]
+    ];
+} else {
+    $nav = [
+        'left' => [
+            ['url' => '/index.php', 'title' => 'Home'],
+            ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
+            ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch.php', 'title' => ' Find drink'],
+            ['url' => '/register.php', 'title' => 'Register'],
+            ['url' => '/login.php', 'title' => 'Login'],
+        ]
+    ];
+}
 
 function insert_drinks()
 {
@@ -52,6 +65,7 @@ function insert_drinks()
     $drinksModel->insert($drink_beer);
     $drinksModel->insert($drink_cider);
 }
+
 //insert_drinks();
 
 function get_form()
@@ -157,12 +171,15 @@ $newNavRegisterObject = new Core\View($nav);
 
 <div class="content">
     <h1 class="vakaro-meniu">Vakaro MENIU</h1>
-<!--    --><?php //var_dump($_POST); ?>
+
     <?php print $newRegisterObject->render(ROOT . '/core/templates/form/form.tpl.php'); ?>
 
     <div class="gerimai">
         <?php foreach ($drinks as $drink): ?>
             <div class="gerimas">
+                <?php if($_SESSION): ?>
+                <span class="delete-btn" data-id="<?php print $drink->getId(); ?>">Delete</span>
+                <?php endif; ?>
                 <h1><?php print $drink->getName(); ?></h1>
                 <h1><?php print $drink->getAmount(); ?>ml</h1>
                 <h1><?php print $drink->getAbarot(); ?>%</h1>
@@ -174,65 +191,30 @@ $newNavRegisterObject = new Core\View($nav);
 
 <script>
     'use strict';
-    // Funkcija registruojanti form'os submit'o listenerį
-    function addListener() {
-        // Paselect'inam form'ą, kurios ID yra drinks-form
-        document.getElementById("drinks-form")
-        // uždedam jai event'o listenerį, kuris suveiks ją submitinus
-            .addEventListener("submit", e => {
-
-                // default'inė event'o f-ija, kuri užkerta (preventina)
-                // puslapio perkrovimą submit'inus formą
-                e.preventDefault();
-
-                // Sukuriam default'ini objektą FormData
-                // Tai yra "tuščia dėžė", kurią nusiųsime
-                // duomenis POST metodu. Į ją append'inam duomenis
-                let formData = new FormData();
-
-                // Paduodame paspausto mygtuko duomenis
-                formData.append('action', 'submit');
-                // Kadangi tik po paspaudimo žinome, kokį gėrimą pasirinko
-                // useris, appendiname select'o su name "gerimas" value:
-                formData.append('gerimas', e.target.gerimas.value); // itraukiam gerimas:gerimo_id
-
-                // Fetch'as paima duomenis iš tam tikro URL'o
-                fetch("./drinks.php", {
-                    // Prieš gaunant duomenis, mes galime juos išsiųsti
-                    // tam tikru metodu. Šiuo atveju naudojame POST
-                    method: "POST",
-                    // Tai yra duomenys, kuriuos nusiunčiame į drinks.php
-                    // Naudojame formData dėl to, kad PHP tinkamai atpažintų
-                    // duomenis ir juos sudėtų į $_POST masyvą
-                    body: formData
+    const delUrl = "/api/drinks/delete.php";
+    const deleteButtons = document.querySelectorAll(".delete-btn");
+    deleteButtons.forEach(function (button) {
+        button.addEventListener("click", e => {
+            e.preventDefault();
+            const drinkId = e.target.getAttribute('data-id');
+            let formData = new FormData();
+            formData.append('id', drinkId);
+            fetch(delUrl, {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.json())
+                .then(obj => {
+                    console.log(obj);
+                    if (obj.status == 'success') {
+                        e.target.parentNode.remove();
+                    } else {
+                        console.log("nepavyko")
+                    }
                 })
-                // Gavus atsaką iš drinks.php, iškviečiama ši funkcija
-                    .then(response => {
-                        // Norėdami gauti tekstą (HTML) iš atsako,
-                        // naudojame šį kodą
-                        response.text().then(text => {
-                            console.log("done");
-                            // Kadangi atsako tekstas yra visas puslapio HTML
-                            // mes esamą HTML'ą perrašome su gautu (text)
-                            document.querySelector("html").innerHTML = text;
-
-                            // Kadangi perrašius HTML'ą nusimuša visi event'ų
-                            // listeneriai, reikia iš naujo užregistruoti
-                            addListener();
-                        });
-                    })
-                    .catch(e => {
-                        // Nes eik nx
-                        console.log(e);
-                    });
-            });
-    }
-
-    // Pirmo užkrovimo metu, registruojame listenerį formai
-    addListener();
-
-
-
+                .catch(e => console.log(e.message));
+        })
+    });
 </script>
 </body>
 </html>

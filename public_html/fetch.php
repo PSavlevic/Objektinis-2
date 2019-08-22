@@ -1,3 +1,34 @@
+<?php
+
+use Core\View;
+
+require '../bootloader.php';
+
+if($_SESSION) {
+    $nav = [
+        'left' => [
+            ['url' => '/index.php', 'title' => 'Home'],
+            ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
+            ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch.php', 'title' => ' Find drink'],
+            ['url' => '/logout.php', 'title' => 'Logout']
+        ]
+    ];
+} else {
+    $nav = [
+        'left' => [
+            ['url' => '/index.php', 'title' => 'Home'],
+            ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
+            ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch.php', 'title' => ' Find drink'],
+            ['url' => '/register.php', 'title' => 'Register'],
+            ['url' => '/login.php', 'title' => 'Login'],
+        ]
+    ];
+}
+
+$newNavRegisterObject = new Core\View($nav);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +38,7 @@
     <link rel="stylesheet" href="media/css/style.css">
 </head>
 <body>
+<?php print $newNavRegisterObject->render(ROOT . '/app/templates/navigation.tpl.php'); ?>
 <form id="drinks-form">
     <input type="text" name="condition">
     <input type="submit">

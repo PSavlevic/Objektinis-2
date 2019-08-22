@@ -186,12 +186,16 @@ div.active a {
     justify-content: space-between;
     align-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 .gerimas{
-    border: 1px solid black;
+    border: 1px solid #3498db;
+    border-radius: 7px;
     display: inline-block;
     padding: 20px;
     text-align: center;
+    width: 20%;
+    margin: 10px;
     
 }
 .gerimas h1:nth-child(1){
@@ -239,5 +243,21 @@ div {
 
 .field-error {
     background-color: red;
+    color: #fff;
+}
+
+.delete-btn {
+    background-color: white;
+    color: #3498db;
+    border: 1px solid #3498db;
+
+    padding: 10px;
+    cursor: pointer;
+
+    border-radius: 3px;
+}
+
+.delete-btn:hover {
+    background-color: #3498db;
     color: #fff;
 }

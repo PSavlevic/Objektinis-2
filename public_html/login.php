@@ -8,14 +8,28 @@ use Core\View;
 
 require '../bootloader.php';
 
-$nav = [
-    'left' => [
-        ['url' => '/index.php', 'title' => 'Home'],
-        ['url' => '/register.php', 'title' => 'Register'],
-        ['url' => '/login.php', 'title' => 'Login'],
-        ['url' => '/logout.php', 'title' => 'Logout']
-    ]
-];
+if($_SESSION) {
+    $nav = [
+        'left' => [
+            ['url' => '/index.php', 'title' => 'Home'],
+            ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
+            ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch.php', 'title' => ' Find drink'],
+            ['url' => '/logout.php', 'title' => 'Logout']
+        ]
+    ];
+} else {
+    $nav = [
+        'left' => [
+            ['url' => '/index.php', 'title' => 'Home'],
+            ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
+            ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch.php', 'title' => ' Find drink'],
+            ['url' => '/register.php', 'title' => 'Register'],
+            ['url' => '/login.php', 'title' => 'Login'],
+        ]
+    ];
+}
 
 
 $form = [
@@ -77,7 +91,7 @@ $form = [
 function form_success($filtered_input, &$form) {
     print 'Sveikinu, tu prisiloginai!';
     $_SESSION = $filtered_input;
-    var_dump($_SESSION);
+    header('Location: '.'drinks.php');
 }
 
 function form_fail($filtered_input, &$form) {
