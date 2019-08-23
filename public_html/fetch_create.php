@@ -10,6 +10,7 @@ if($_SESSION) {
             ['url' => '/index.php', 'title' => 'Home'],
             ['url' => '/fetch_create.php', 'title' => 'Create Drink'],
             ['url' => '/drinks.php', 'title' => 'Drinks.php'],
+            ['url' => '/fetch_update.php', 'title' => 'Update(edit)'],
             ['url' => '/fetch.php', 'title' => ' Find drink'],
             ['url' => '/logout.php', 'title' => 'Logout']
         ]
