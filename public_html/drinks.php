@@ -74,6 +74,7 @@ function get_form()
     return [
         'attr' => [
             //'action' => '', Neb?tina, jeigu action yra ''
+            "id" => "drinks-form",
             'method' => 'POST',
         ],
         'fields' => [

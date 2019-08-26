@@ -170,8 +170,8 @@ $newNavRegisterObject = new Core\View($nav);
                     <button class="update-btn" data-id="<?php print $drink->getId(); ?>">Update</button>
                 <?php endif; ?>
                 <h1><?php print $drink->getName(); ?></h1>
-                <h1><?php print $drink->getAmount(); ?>ml</h1>
-                <h1><?php print $drink->getAbarot(); ?>%</h1>
+                <h2><?php print $drink->getAmount(); ?>ml</h2>
+                <h3><?php print $drink->getAbarot(); ?>%</h3>
                 <img src="<?php print $drink->getImage(); ?>">
             </div>
         <?php endforeach; ?>
@@ -233,6 +233,8 @@ $newNavRegisterObject = new Core\View($nav);
 //                        dar vienas eventlisteneris pop up formai
         })
     });
+
+
     function showUpdateForm(data) {
         let updateForm = document.querySelector("#update-form");
         updateForm.name.value = data.name;
@@ -240,33 +242,47 @@ $newNavRegisterObject = new Core\View($nav);
         updateForm.abarot.value = data.abarot;
         updateForm.image.value = data.image;
 //                                        document.querySelector("#update-form input[name='name']").value = obj.data.name;
-        updateForm.addEventListener('submit', e => {
-            e.preventDefault();
-            let formData = new FormData(e.target);
-            //e.target.name.value yra userio ivesta inputo verte
-            //o e.target yra visi inputai ivesti userio
-            formData.append('id', data.id);
-            fetch(updateUrl, {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.json())
-                .then(obj => {
-                    if (obj.status == 'success') {
-                        updateDrinkInList(obj.data);
-                        //padaro forma display none auksciau esantis modal kodas
-                        modal.style.display = "none";
-                    } else {
-                        console.log("nepavyko");
-                    }
-                    console.log(obj);
-                })
-                .catch(e => console.log(e.message))
-        });
+                    updateForm.addEventListener('submit', function updateOnClick(e) {
+                        e.preventDefault();
+                        this.removeEventListener('submit', updateOnClick);
+
+                        let formData = new FormData(e.target);
+                        //e.target.name.value yra userio ivesta inputo verte
+                        //o e.target yra visi inputai ivesti userio
+                        formData.append('id', data.id);
+                        fetch(updateUrl, {
+                            method: "POST",
+                            body: formData
+                        })
+                            .then(response => response.json())
+                            .then(obj => {
+                                if (obj.status == 'success') {
+                                    updateDrinkInList(obj.data);
+                                    //padaro forma display none auksciau esantis modal kodas
+                                    modal.style.display = "none";
+                                } else {
+                                    console.log("nepavyko");
+                                }
+                                console.log(obj);
+                            })
+                            .catch(e => console.log(e.message))
+                    });
     }
+
 
     function updateDrinkInList(data) {
         //parasyti, kad ne refreshinus puslapio su javascriptu atvaizduotu ivestus userio duomenis
+//                    console.log(data.name);
+//                      console.log(data.id);
+        const updatingDrinkDiv = document.querySelector('*[data-id="' + data.id + '"]');
+        console.log(updatingDrinkDiv);
+        const mainDiv = updatingDrinkDiv.parentNode;
+        const drinkH1 = mainDiv.querySelector("h1");
+        drinkH1.innerHTML = data.name;
+        const drinkH2 = mainDiv.querySelector("h2");
+        drinkH2.innerHTML = data.amount_ml + "ml";
+        mainDiv.querySelector("h3").innerHTML = data.abarot+"%";
+        mainDiv.querySelector("img").src = data.image;
     }
 </script>
 </body>
